@@ -51,7 +51,40 @@ export class TaskService {
 
   // List all tasks
   async getAllTasks() {
-    return this.databaseService.findAll();
+    // Fetch all tasks from the Nedb database
+    const tasks = await this.databaseService.findAll();
+
+    // Get the current time
+    const now = new Date();
+    const twoHoursFromNow = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
+    // Filter tasks based on completion status and deadline
+    return tasks.filter((task) => {
+      const isCompleted = task.completed ? task.completed === true : true;
+      return (
+        isCompleted &&
+        (!task.deadline || new Date(task.deadline) <= twoHoursFromNow)
+      );
+    });
+  }
+
+  // List archived tasks
+  async getArchivedTasks() {
+    // Fetch archived tasks from the Nedb database
+    const tasks = await this.databaseService.findAll();
+
+    // Get the current time
+    const now = new Date();
+    const twoHoursFromNow = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
+    // Filter tasks based on completion status and deadline
+    return tasks.filter((task) => {
+      const isCompleted = task.completed ? task.completed === true : true;
+      return (
+        isCompleted &&
+        (!task.deadline || new Date(task.deadline) >= twoHoursFromNow)
+      );
+    });
   }
 
   // Get a summary of tasks

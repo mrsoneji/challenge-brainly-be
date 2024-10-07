@@ -81,6 +81,17 @@ export class TaskController {
     return this.taskService.getAllTasks();
   }
 
+  // List all archived tasks
+  @Get('/archives')
+  @ApiOperation({ summary: 'List all archived tasks' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of archived tasks retrieved successfully.',
+  })
+  async getArchivedTasks() {
+    return this.taskService.getArchivedTasks();
+  }
+
   // Get a summary of completed and non-completed tasks
   @Get('summary')
   @ApiOperation({ summary: 'Get a summary of tasks' })

@@ -25,6 +25,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.4.2",
     "class-validator": "^0.14.1",
+    "cors": "^2.8.5",
     "nedb": "^1.8.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
